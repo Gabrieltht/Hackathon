@@ -18,7 +18,7 @@ suicide_target = [1] * len(suicide_quotes_lst)
 # combine two lists
 final_lst = depression_quotes_lst + suicide_quotes_lst
 
-# encode text data into numerical values
+# encode text data into numerical values (smaller dataset used)
 vectorizer = TfidfVectorizer()
 vectorizer.fit(depression_quotes_lst)
 vector = vectorizer.transform(depression_quotes_lst)
