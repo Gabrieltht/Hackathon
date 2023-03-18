@@ -5,37 +5,23 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 
-# convert df to a list of text document
-# depression
-depress_df = pd.read_csv("dataset/depression.csv")
-depression_quotes_lst = depress_df["post"].tolist()
+# convert df to lists of text document
+depress_df = pd.read_csv(
+    "/Users/jessicashen/Desktop/HacktheMist_data/depression_reddit_cleaned.csv")
+depression_quotes_lst = depress_df['clean_text'].tolist()
 
-# normal
-tweets_df = pd.read_csv("dataset/Tweets.csv")
-# remove negative sentiment
-positive_df = tweets_df[tweets_df["sentiment"].str.contains("negative") == False]
-normal_quotes_lst = positive_df["selected_text"].values.astype('U').tolist()
-
-# combine the two lists
-final_list = depression_quotes_lst + normal_quotes_lst
-
-# encode text data
+# encode text data into numerical values
 vectorizer = TfidfVectorizer()
-vectorizer.fit(final_list)
-vector = vectorizer.transform(final_list)
+vectorizer.fit(depression_quotes_lst)
+vector = vectorizer.transform(depression_quotes_lst)
 
-# depression shape (33554, 41111)
-# normal shape (19700, 16101)
-depression_target = [1] * len(depression_quotes_lst)
-normal_target = [0] * len(normal_quotes_lst)
-
+# creating features and target arrays
 X = vector
-y = np.asarray(depression_target + normal_target)
+y = depress_df['is_depression'].values
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=21, stratify = y)
-
-print(X.shape)
-print(y_train)
+# train/test split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3,
+                                                    random_state=21, stratify=y)
 
 clf = SVC().fit(X_train, y_train)
 
