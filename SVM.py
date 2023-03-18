@@ -45,3 +45,4 @@ print(preds)
 
 accuracy = np.mean(preds == y_test)
 print(f'Accuracy on test data is {accuracy*100}%.')
+
