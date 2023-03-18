@@ -6,11 +6,11 @@ from sklearn.model_selection import train_test_split
 # convert df to lists of text document
 # dataset 1
 depress_df = pd.read_csv(
-    '/Users/jessicashen/Desktop/HacktheMist_data/depression_reddit_cleaned.csv')
+    './depression_reddit_cleaned.csv')
 depression_quotes_lst = depress_df['clean_text'].tolist()
 # dataset 2
 suicide_df = pd.read_csv(
-    '/Users/jessicashen/Desktop/HacktheMist_data/suicide.csv')
+    './suicide.csv')
 suicide_quotes_lst = suicide_df['text'].tolist()
 suicide_target = [1] * len(suicide_quotes_lst)
 # combine two lists
