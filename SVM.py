@@ -26,7 +26,6 @@ vector = vectorizer.transform(depression_quotes_lst)
 X = vector
 y = (depress_df['is_depression'].values).tolist() + prev_ys
 
-print(y)
 
 
 # train/test split
