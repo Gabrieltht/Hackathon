@@ -11,7 +11,8 @@ depress_df = pd.read_csv(
 depression_quotes_lst = depress_df['clean_text'].tolist()
 
 prev_depress_df = pd.read_csv(
-    "./suicide.csv")
+    "./dataset/depression.csv")
+    
 prev_depression_quotes_lst = prev_depress_df['post'].tolist()
 prev_ys = [1] * len(prev_depression_quotes_lst)
 
